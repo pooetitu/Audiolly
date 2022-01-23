@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 21
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.pierre.ebrahim.openfoodfacts"
         minSdk 21
-        targetSdk 21
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
