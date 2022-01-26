@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/tab_rankings"
-        android:name="com.audiolly.RankingFragment"
+        android:name="com.audiolly.features.ranking.RankingFragment"
         android:label="RankingFragment" />
     <fragment
         android:id="@+id/tab_search"

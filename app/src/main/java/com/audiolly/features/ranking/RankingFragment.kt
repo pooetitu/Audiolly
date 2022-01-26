@@ -1,12 +1,13 @@
-package com.audiolly
+package com.audiolly.features.ranking
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.audiolly.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.ranking_fragment.*
 
 class RankingFragment : Fragment() {
@@ -17,16 +18,15 @@ class RankingFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.ranking_fragment, parent, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        main_list.run {
-            layoutManager = LinearLayoutManager(this@RankingFragment.context)
-            adapter = ListAdapter()
-            addItemDecoration(
-                DividerItemDecoration(
-                    this@RankingFragment.context,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-        }
+        viewpager.adapter = RankingAdapter(this)
+        TabLayoutMediator(tabLayout, viewpager) { tab: TabLayout.Tab, i: Int ->
+            if (i == 0) {
+                tab.text = getString(R.string.titles)
+            } else {
+                tab.text = getString(R.string.albums)
+            }
+        }.attach()
     }
 }
