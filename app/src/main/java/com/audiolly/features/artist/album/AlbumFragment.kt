@@ -1,4 +1,4 @@
-package com.audiolly.features.ranking.album
+package com.audiolly.features.artist.album
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import kotlinx.android.synthetic.main.music_ranking_fragment.*
 
-class AlbumRankingFragment : Fragment() {
+class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         parent: ViewGroup?,
@@ -20,8 +20,8 @@ class AlbumRankingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         main_list.run {
-            layoutManager = LinearLayoutManager(this@AlbumRankingFragment.context)
-            adapter = AlbumRankingAdapter()
+            layoutManager = LinearLayoutManager(this@AlbumFragment.context)
+            adapter = AlbumAdapter()
         }
     }
 }

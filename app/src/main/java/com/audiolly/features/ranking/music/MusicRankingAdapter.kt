@@ -9,15 +9,15 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 
-class MusicAdapter : RecyclerView.Adapter<MusicItem>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicItem {
-        return MusicItem(
+class MusicRankingAdapter : RecyclerView.Adapter<MusicRankingItem>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicRankingItem {
+        return MusicRankingItem(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.music_ranking_item, parent, false)
         )
     }
 
-    override fun onBindViewHolder(cell: MusicItem, position: Int) {
+    override fun onBindViewHolder(cell: MusicRankingItem, position: Int) {
         // TODO
         cell.rank.text = position.toString()
         cell.songTitle.text = "Gucci Gang"
