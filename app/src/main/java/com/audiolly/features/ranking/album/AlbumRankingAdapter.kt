@@ -9,15 +9,15 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 
-class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumItem {
-        return AlbumItem(
+class AlbumRankingAdapter : RecyclerView.Adapter<AlbumRankingItem>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumRankingItem {
+        return AlbumRankingItem(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.album_ranking_item, parent, false)
         )
     }
 
-    override fun onBindViewHolder(cell: AlbumItem, position: Int) {
+    override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         cell.rank.text = position.toString()
         cell.albumTitle.text = "Gucci Gang"
         cell.albumArtist.text = "Lil Pump"
