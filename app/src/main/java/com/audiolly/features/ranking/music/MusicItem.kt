@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.music_item.view.*
+import kotlinx.android.synthetic.main.music_ranking_item.view.*
 
 class MusicItem(v: View) : RecyclerView.ViewHolder(v) {
     val rank: TextView = v.rank
