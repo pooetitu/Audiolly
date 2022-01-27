@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_menu_nav"
+    app:startDestination="@id/tab_rankings">
+
+    <fragment
+        android:id="@+id/tab_rankings"
+        android:name="com.audiolly.RankingFragment"
+        android:label="RankingFragment" />
+    <fragment
+        android:id="@+id/tab_search"
+        android:name="com.audiolly.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/tab_favorites"
+        android:name="com.audiolly.FavoritesFragment"
+        android:label="FavoritesFragment" />
+</navigation>
