@@ -13,7 +13,7 @@ class MusicAdapter : RecyclerView.Adapter<MusicItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicItem {
         return MusicItem(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.music_item, parent, false)
+                .inflate(R.layout.music_ranking_item, parent, false)
         )
     }
 
