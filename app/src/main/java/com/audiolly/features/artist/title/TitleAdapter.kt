@@ -14,7 +14,6 @@ class TitleAdapter : RecyclerView.Adapter<TitleItem>() {
     }
 
     override fun onBindViewHolder(cell: TitleItem, position: Int) {
-        println(position)
         cell.position.text = position.toString()
         cell.titleName.text = "Gucci Gang"
     }
