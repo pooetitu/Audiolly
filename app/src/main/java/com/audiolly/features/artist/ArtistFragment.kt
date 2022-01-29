@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import com.audiolly.features.artist.album.AlbumAdapter
-import com.audiolly.features.ranking.music.MusicRankingAdapter
+import com.audiolly.features.artist.title.TitleAdapter
 import kotlinx.android.synthetic.main.artist_fragment.*
 
 class ArtistFragment : Fragment() {
@@ -27,7 +27,7 @@ class ArtistFragment : Fragment() {
         }
         appreciated_titles_list.run {
             layoutManager = LinearLayoutManager(this@ArtistFragment.context)
-            adapter = MusicRankingAdapter()
+            adapter = TitleAdapter()
         }
     }
 }

@@ -29,6 +29,6 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 12
     }
 }
