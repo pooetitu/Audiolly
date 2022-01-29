@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
@@ -21,6 +22,10 @@ class ArtistFragment : Fragment() {
         return inflater.inflate(R.layout.artist_fragment, parent, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        return_button.setOnClickListener {
+            view.findNavController()
+                .navigateUp()
+        }
         albums_list.run {
             layoutManager = GridLayoutManager(this@ArtistFragment.context,3,LinearLayoutManager.HORIZONTAL,false)
             adapter = AlbumAdapter()
