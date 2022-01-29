@@ -13,7 +13,7 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumItem {
         return AlbumItem(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.album_ranking_item, parent, false)
+                .inflate(R.layout.album_item, parent, false)
         )
     }
 
