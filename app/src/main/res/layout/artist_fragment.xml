@@ -21,9 +21,9 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/atist_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Khalid"
                             android:textColor="@color/white"
                             android:textSize="24sp"
                             android:textStyle="bold"
@@ -34,7 +34,7 @@
                             android:id="@+id/artist_location_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Toronto, Canada - RandB"
+                            android:text="@string/location_genre"
                             android:textColor="@color/gray"
                             android:layout_marginBottom="10dp"
                             app:layout_constraintBottom_toBottomOf="@id/artist_thumbnail"
@@ -44,7 +44,6 @@
                             android:id="@+id/description"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="description"
                             android:textColor="@color/gray"
                             android:layout_marginTop="10dp"
                             app:layout_constraintEnd_toEndOf="@id/guideline_end"
@@ -55,8 +54,8 @@
                             android:id="@+id/albums_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Albums (12)"
+                            android:layout_marginVertical="20dp"
+                            android:text="@string/albums_count"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -85,7 +84,7 @@
                             android:id="@+id/appreciated_titles"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginVertical="20dp"
                             android:text="@string/most_appreciated_titles"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -105,7 +104,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/appreciated_titles_list"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
                             app:layout_constraintEnd_toEndOf="@id/guideline_end"
