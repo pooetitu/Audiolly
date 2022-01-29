@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fontFamily">SF Pro Display Heavy</item>
         <item name="android:textColor">@color/black</item>
         <item name="tabStyle">@style/Theme.Audiolly.AppTabLayout</item>

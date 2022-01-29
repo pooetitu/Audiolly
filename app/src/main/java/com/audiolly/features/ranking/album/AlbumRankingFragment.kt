@@ -21,7 +21,7 @@ class AlbumRankingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         main_list.run {
             layoutManager = LinearLayoutManager(this@AlbumRankingFragment.context)
-            adapter = AlbumAdapter()
+            adapter = AlbumRankingAdapter()
         }
     }
 }
