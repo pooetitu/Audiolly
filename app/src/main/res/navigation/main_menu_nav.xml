@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/tab_rankings"
         android:name="com.audiolly.features.ranking.RankingFragment"
-        android:label="RankingFragment" />
+        android:label="RankingFragment" >
+        <action
+            android:id="@+id/action_tab_rankings_to_artistFragment"
+            app:destination="@id/artistFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tab_search"
         android:name="com.audiolly.SearchFragment"
@@ -16,4 +20,8 @@
         android:id="@+id/tab_favorites"
         android:name="com.audiolly.FavoritesFragment"
         android:label="FavoritesFragment" />
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.audiolly.features.artist.ArtistFragment"
+        android:label="ArtistFragment" />
 </navigation>
