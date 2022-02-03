@@ -22,6 +22,10 @@ class ArtistFragment : Fragment() {
         return inflater.inflate(R.layout.artist_fragment, parent, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        artist_name.text = "Khalid"
+        artist_location_genre.text = getString(R.string.location_genre, "Toronto, Canada", "R&B")
+        description.text = "description"
+        albums_count.text = getString(R.string.albums_count, 12)
         return_button.setOnClickListener {
             view.findNavController()
                 .navigateUp()

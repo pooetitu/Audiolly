@@ -6,7 +6,7 @@
     android:layout_marginVertical="5dp"
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/gray_05">
+    android:background="@drawable/rounded_gray_05">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="15dp" />
+        android:layout_marginEnd="4dp" />
 
     <ImageView
         android:id="@+id/album_thumbnail"
