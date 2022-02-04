@@ -6,10 +6,11 @@
     <string name="titles">Titles</string>
     <string name="albums">Albums</string>
     <string name="song_thumbnail">Song\'s thumbnail</string>
-    <string name="review_count">%1$s reviews</string>
+    <string name="review_count">%1$d votes</string>
     <string name="rate" translatable="false">%1$.1f</string>
     <string name="album_thumbnail">Album\'s thumbnail</string>
     <string name="most_appreciated_titles">Most appreciated titles</string>
     <string name="location_genre" translatable="false">%1$s - %2$s</string>
     <string name="albums_count" translatable="false">Albums (%1$d)</string>
+    <string name="songs_count">%1$d songs</string>
 </resources>

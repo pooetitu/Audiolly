@@ -7,7 +7,8 @@
     <string name="titles">Titres</string>
     <string name="albums">Albums</string>
     <string name="song_thumbnail">Miniature de la musique</string>
-    <string name="review_count">%1$s avis</string>
+    <string name="review_count">%1$d votes</string>
     <string name="album_thumbnail">Miniature de l\'album</string>
     <string name="most_appreciated_titles">Titres les plus appréciés</string>
+    <string name="songs_count">%1$d chansons</string>
 </resources>
