@@ -2,14 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_nav.xml"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/mainMenuFragment">
 
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="com.audiolly.MainMenuFragment"
         android:label="MainMenuFragment" />
-    <fragment
-        android:id="@+id/albumFragment"
-        android:name="com.audiolly.features.album.AlbumFragment"
-        android:label="AlbumFragment" />
 </navigation>

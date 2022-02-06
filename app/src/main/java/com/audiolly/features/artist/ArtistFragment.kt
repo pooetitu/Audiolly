@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import com.audiolly.features.artist.album.AlbumAdapter
 import com.audiolly.features.artist.title.TitleAdapter
+import kotlinx.android.synthetic.main.album_fragment.*
 import kotlinx.android.synthetic.main.artist_fragment.*
+import kotlinx.android.synthetic.main.artist_fragment.artist_name
+import kotlinx.android.synthetic.main.artist_fragment.description
+import kotlinx.android.synthetic.main.artist_fragment.return_button
 
 class ArtistFragment : Fragment() {
     override fun onCreateView(

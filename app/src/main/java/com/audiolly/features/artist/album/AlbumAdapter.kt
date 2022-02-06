@@ -2,6 +2,7 @@ package com.audiolly.features.artist.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
 import com.bumptech.glide.Glide
@@ -18,6 +19,11 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
     }
 
     override fun onBindViewHolder(cell: AlbumItem, position: Int) {
+        cell.itemView.setOnClickListener {
+            cell.itemView
+                .findNavController()
+                .navigate(R.id.action_artistFragment_to_albumFragment)
+        }
         cell.albumTitle.text = "After hours"
         cell.creationYear.text = "2021"
         Glide.with(cell.thumbnail.context)

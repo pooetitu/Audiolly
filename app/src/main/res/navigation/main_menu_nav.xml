@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_tab_rankings_to_artistFragment"
             app:destination="@id/artistFragment" />
+        <action
+            android:id="@+id/action_tab_rankings_to_albumFragment"
+            app:destination="@id/albumFragment" />
     </fragment>
     <fragment
         android:id="@+id/tab_search"
@@ -23,5 +26,13 @@
     <fragment
         android:id="@+id/artistFragment"
         android:name="com.audiolly.features.artist.ArtistFragment"
-        android:label="ArtistFragment" />
+        android:label="ArtistFragment" >
+        <action
+            android:id="@+id/action_artistFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.audiolly.features.album.AlbumFragment"
+        android:label="AlbumFragment" />
 </navigation>

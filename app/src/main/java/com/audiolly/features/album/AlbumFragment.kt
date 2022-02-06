@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import com.audiolly.features.artist.title.TitleAdapter
@@ -12,7 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.album_fragment.*
+import kotlinx.android.synthetic.main.album_fragment.artist_name
+import kotlinx.android.synthetic.main.album_fragment.description
+import kotlinx.android.synthetic.main.album_fragment.return_button
 import kotlinx.android.synthetic.main.album_fragment.titles_list
+import kotlinx.android.synthetic.main.artist_fragment.*
 
 class AlbumFragment: Fragment() {
     override fun onCreateView(
@@ -42,6 +47,10 @@ class AlbumFragment: Fragment() {
             .centerCrop()
             .placeholder(R.drawable.ic_placeholder_album)
             .into(thumbnail_translucent)
+        return_button.setOnClickListener {
+            view.findNavController()
+                .navigateUp()
+        }
         titles_list.run {
             layoutManager = LinearLayoutManager(this@AlbumFragment.context)
             adapter = TitleAdapter()
