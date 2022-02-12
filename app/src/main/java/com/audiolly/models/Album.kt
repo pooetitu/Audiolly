@@ -1,11 +1,14 @@
 package com.audiolly.models
 
-class Album(
-    val id: String,
-    val artist: Artist,
-    val musics: List<Music>,
-    val title: String,
-    val description: String,
-    val score: Float,
-    val scoreVotes: Int
+data class Album (
+    val idAlbum: String,
+    val idArtist: String,
+    val strAlbum: String,
+    val strArtist: String,
+    val intYearReleased: Int,
+    val strGenre: String,
+    val strAlbumThumb: String,
+    val strDescriptionEN: String,
+    val intScore: Int,
+    val intScoreVotes: Int,
 )

@@ -1,11 +1,11 @@
 package com.audiolly.models
 
-import android.net.Uri
-
-class Music(
-    val id: String,
-    val artist: List<Artist>,
-    val title: String,
-    val album: Album,
-    val thumbnail: Uri,
+data class Music(
+    val idTrack: String,
+    val idAlbum: String,
+    val idArtist: String,
+    val strArtist: String,
+    val strGenre: String,
+    val strTrack: String,
+    val strAlbum: String,
 )
