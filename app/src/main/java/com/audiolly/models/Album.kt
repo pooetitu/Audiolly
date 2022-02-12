@@ -9,6 +9,6 @@ data class Album (
     val strGenre: String,
     val strAlbumThumb: String,
     val strDescriptionEN: String,
-    val intScore: Int,
+    val intScore: Float,
     val intScoreVotes: Int,
 )

@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="Classements"
+        app:title="@string/rankings"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
@@ -21,12 +21,14 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/title_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/titles"
             />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/album_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/albums"

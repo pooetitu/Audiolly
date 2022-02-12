@@ -5,12 +5,18 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
+import com.audiolly.api.TheAudioDBNetworkManager
+import com.audiolly.models.AlbumTrending
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class AlbumRankingAdapter : RecyclerView.Adapter<AlbumRankingItem>() {
+class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) : RecyclerView.Adapter<AlbumRankingItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumRankingItem {
         return AlbumRankingItem(
             LayoutInflater.from(parent.context)
@@ -19,18 +25,23 @@ class AlbumRankingAdapter : RecyclerView.Adapter<AlbumRankingItem>() {
     }
 
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
+        GlobalScope.launch(Dispatchers.Default) {
+            val response = TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albumsRanking[0]
+            withContext(Dispatchers.Main) {
+                cell.rate.text = cell.itemView.context.getString(R.string.rate, response.intScore)
+                cell.reviewCount.text = cell.itemView.context.getString(R.string.review_count, response.intScoreVotes.toString())
+            }
+        }
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
                 .navigate(R.id.action_tab_rankings_to_albumFragment)
         }
-        cell.rank.text = position.toString()
-        cell.albumTitle.text = "Gucci Gang"
-        cell.albumArtist.text = "Lil Pump"
-        cell.rate.text = cell.itemView.context.getString(R.string.rate, 4.2f)
-        cell.reviewCount.text = cell.itemView.context.getString(R.string.review_count, "5k")
+        cell.rank.text = albums[position].intChartPlace.toString()
+        cell.albumTitle.text = albums[position].strAlbum
+        cell.albumArtist.text = albums[position].strArtist
         Glide.with(cell.thumbnail.context)
-            .load("https://e.snmc.io/i/600/s/d537cb481e92854ec656a2e68adb13b9/9116225/stylesandcomplete-x-nathaniel-knows-x-purowuan-gucci-gang-stylesandcomplete-x-nathaniel-knows-x-purowuan-remix-Cover-Art.jpg")
+            .load(albums[position].strAlbumThumb)
             .centerCrop()
             .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
             .placeholder(R.drawable.ic_placeholder_album)
@@ -38,6 +49,6 @@ class AlbumRankingAdapter : RecyclerView.Adapter<AlbumRankingItem>() {
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return albums.size
     }
 }

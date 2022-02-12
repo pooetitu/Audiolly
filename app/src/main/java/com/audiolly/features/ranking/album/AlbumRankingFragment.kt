@@ -7,7 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
+import com.audiolly.api.TheAudioDBNetworkManager
 import kotlinx.android.synthetic.main.music_ranking_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumRankingFragment : Fragment() {
     override fun onCreateView(
@@ -19,9 +24,15 @@ class AlbumRankingFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        main_list.run {
-            layoutManager = LinearLayoutManager(this@AlbumRankingFragment.context)
-            adapter = AlbumRankingAdapter()
+        GlobalScope.launch(Dispatchers.Default) {
+            val response = TheAudioDBNetworkManager.getAlbumRankingAsync().albumsRanking
+            response.sortBy{ it.intChartPlace }
+            withContext(Dispatchers.Main) {
+                main_list.run {
+                    layoutManager = LinearLayoutManager(this@AlbumRankingFragment.context)
+                    adapter = AlbumRankingAdapter(response)
+                }
+            }
         }
     }
 }
