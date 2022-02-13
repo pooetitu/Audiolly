@@ -11,10 +11,7 @@ import com.audiolly.models.AlbumTrending
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
@@ -25,7 +22,6 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
                 .inflate(R.layout.album_ranking_item, parent, false)
         )
     }
-
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         GlobalScope.launch(Dispatchers.Default) {
             val response =

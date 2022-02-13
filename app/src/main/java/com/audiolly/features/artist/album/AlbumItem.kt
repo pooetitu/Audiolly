@@ -10,5 +10,5 @@ import kotlinx.android.synthetic.main.album_item.view.*
 class AlbumItem(v: View) : RecyclerView.ViewHolder(v) {
     val thumbnail: ImageView = v.album_thumbnail
     val albumTitle: TextView = v.album_title
-    val creationYear: TextView = v.creation_year
+    val subtitle: TextView = v.subtitle
 }

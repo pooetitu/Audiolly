@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
 import kotlinx.android.synthetic.main.music_ranking_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class MusicRankingFragment : Fragment() {
     override fun onCreateView(
@@ -22,9 +19,9 @@ class MusicRankingFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.music_ranking_fragment, parent, false)
     }
-
+    var asyncTask: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        GlobalScope.launch(Dispatchers.Default) {
+        asyncTask = GlobalScope.launch(Dispatchers.Default) {
             val response = TheAudioDBNetworkManager.getMusicRankingAsync().musicsRanking
             response.sortBy { it.intChartPlace }
             withContext(Dispatchers.Main) {
@@ -34,5 +31,10 @@ class MusicRankingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        asyncTask?.cancel()
     }
 }

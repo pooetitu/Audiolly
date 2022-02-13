@@ -30,7 +30,7 @@ class AlbumAdapter(private val albums: MutableList<Album>) : RecyclerView.Adapte
                 )
         }
         cell.albumTitle.text = albums[position].strAlbum
-        cell.creationYear.text = albums[position].intYearReleased.toString()
+        cell.subtitle.text = albums[position].intYearReleased.toString()
         Glide.with(cell.thumbnail.context)
             .load(albums[position].strAlbumThumb)
             .centerCrop()

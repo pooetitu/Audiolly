@@ -13,4 +13,5 @@
     <string name="location_genre" translatable="false">%1$s - %2$s</string>
     <string name="albums_count" translatable="false">Albums (%1$d)</string>
     <string name="songs_count">%1$d songs</string>
+    <string name="artists">Artists</string>
 </resources>

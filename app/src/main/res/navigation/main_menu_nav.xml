@@ -17,8 +17,15 @@
     </fragment>
     <fragment
         android:id="@+id/tab_search"
-        android:name="com.audiolly.SearchFragment"
-        android:label="SearchFragment" />
+        android:name="com.audiolly.features.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_tab_search_to_artistFragment"
+            app:destination="@id/artistFragment" />
+        <action
+            android:id="@+id/action_tab_search_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tab_favorites"
         android:name="com.audiolly.FavoritesFragment"

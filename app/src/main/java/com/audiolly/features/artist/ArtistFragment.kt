@@ -16,10 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.artist_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.util.*
 
 class ArtistFragment : Fragment() {
@@ -30,9 +27,9 @@ class ArtistFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.artist_fragment, parent, false)
     }
-
+    var asyncTask: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        GlobalScope.launch(Dispatchers.Default) {
+        asyncTask = GlobalScope.launch(Dispatchers.Default) {
             val artistId = arguments?.getString("artistId")
             val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists[0]
             val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
@@ -71,5 +68,10 @@ class ArtistFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        asyncTask?.cancel()
     }
 }

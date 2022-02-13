@@ -18,10 +18,7 @@ import kotlinx.android.synthetic.main.album_fragment.artist_name
 import kotlinx.android.synthetic.main.album_fragment.description
 import kotlinx.android.synthetic.main.album_fragment.return_button
 import kotlinx.android.synthetic.main.artist_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.util.*
 
 class AlbumFragment : Fragment() {
@@ -32,10 +29,11 @@ class AlbumFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.album_fragment, parent, false)
     }
+    var asyncTask: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val albumId = arguments?.getString("albumId")
-        GlobalScope.launch(Dispatchers.Default) {
+        asyncTask = GlobalScope.launch(Dispatchers.Default) {
             val album = TheAudioDBNetworkManager.getAlbumDataAsync(albumId!!).albumsRanking[0]
             val musics = TheAudioDBNetworkManager.getAlbumMusicsAsync(albumId).musics
             withContext(Dispatchers.Main) {
@@ -69,5 +67,10 @@ class AlbumFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        asyncTask?.cancel()
     }
 }
