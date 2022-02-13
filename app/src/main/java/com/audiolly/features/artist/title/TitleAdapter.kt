@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
+import com.audiolly.models.Music
 
-class TitleAdapter : RecyclerView.Adapter<TitleItem>() {
+class TitleAdapter(private val musics: MutableList<Music>) : RecyclerView.Adapter<TitleItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleItem {
         return TitleItem(
             LayoutInflater.from(parent.context)
@@ -16,11 +17,11 @@ class TitleAdapter : RecyclerView.Adapter<TitleItem>() {
     override fun onBindViewHolder(cell: TitleItem, position: Int) {
         val pos = position + 1
         cell.position.text = pos.toString()
-        cell.titleName.text = "Gucci Gang"
+        cell.titleName.text = musics[position].strTrack
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return musics.size
     }
 }
 

@@ -43,6 +43,8 @@
                         <TextView
                             android:id="@+id/description"
                             android:layout_width="0dp"
+                            android:ellipsize="end"
+                            android:maxLines="4"
                             android:layout_height="wrap_content"
                             android:textColor="@color/gray"
                             android:layout_marginTop="10dp"

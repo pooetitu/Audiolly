@@ -30,9 +30,16 @@
         <action
             android:id="@+id/action_artistFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
+        <argument
+            android:name="artistId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.audiolly.features.album.AlbumFragment"
-        android:label="AlbumFragment" />
+        android:label="AlbumFragment" >
+        <argument
+            android:name="albumId"
+            app:argType="string" />
+    </fragment>
 </navigation>

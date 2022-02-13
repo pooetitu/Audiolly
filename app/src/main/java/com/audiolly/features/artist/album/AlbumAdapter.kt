@@ -2,15 +2,17 @@ package com.audiolly.features.artist.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
+import com.audiolly.models.Album
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 
-class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
+class AlbumAdapter(private val albums: MutableList<Album>) : RecyclerView.Adapter<AlbumItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumItem {
         return AlbumItem(
             LayoutInflater.from(parent.context)
@@ -22,12 +24,12 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_artistFragment_to_albumFragment)
+                .navigate(R.id.action_artistFragment_to_albumFragment, bundleOf("albumId" to albums[position].idAlbum))
         }
-        cell.albumTitle.text = "After hours"
-        cell.creationYear.text = "2021"
+        cell.albumTitle.text = albums[position].strAlbum
+        cell.creationYear.text = albums[position].intYearReleased.toString()
         Glide.with(cell.thumbnail.context)
-            .load("https://e.snmc.io/i/600/s/d537cb481e92854ec656a2e68adb13b9/9116225/stylesandcomplete-x-nathaniel-knows-x-purowuan-gucci-gang-stylesandcomplete-x-nathaniel-knows-x-purowuan-remix-Cover-Art.jpg")
+            .load(albums[position].strAlbumThumb)
             .centerCrop()
             .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
             .placeholder(R.drawable.ic_placeholder_album)
@@ -35,6 +37,6 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumItem>() {
     }
 
     override fun getItemCount(): Int {
-        return 12
+        return albums.size
     }
 }

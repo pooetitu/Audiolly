@@ -2,6 +2,7 @@ package com.audiolly.features.ranking.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
@@ -29,15 +30,15 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) : Recy
             val response = TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albumsRanking[0]
             withContext(Dispatchers.Main) {
                 cell.rate.text = cell.itemView.context.getString(R.string.rate, response.intScore)
-                cell.reviewCount.text = cell.itemView.context.getString(R.string.review_count, response.intScoreVotes.toString())
+                cell.reviewCount.text = cell.itemView.context.getString(R.string.review_count, response.intScoreVotes)
             }
         }
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_tab_rankings_to_albumFragment)
+                .navigate(R.id.action_tab_rankings_to_albumFragment, bundleOf("albumId" to albums[position].idAlbum))
         }
-        cell.rank.text = albums[position].intChartPlace.toString()
+        cell.rank.text = (position+1).toString()
         cell.albumTitle.text = albums[position].strAlbum
         cell.albumArtist.text = albums[position].strArtist
         Glide.with(cell.thumbnail.context)

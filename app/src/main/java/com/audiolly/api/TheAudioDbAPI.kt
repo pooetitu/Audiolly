@@ -28,4 +28,6 @@ interface AudioDBAPI {
     @GET("artist.php")
     fun getArtistDataAsync(@Query("i") artistId: String): Deferred<ArtistResponse>
 
+    @GET("track-top10-mb.php")
+    fun getArtistTopMusic(@Query("s") musicBrainzId: String): Deferred<MusicResponse>
 }

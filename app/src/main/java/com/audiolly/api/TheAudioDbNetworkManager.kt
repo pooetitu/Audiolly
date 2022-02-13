@@ -40,4 +40,8 @@ object TheAudioDBNetworkManager {
     suspend fun getArtistDataAsync(artistId: String): ArtistResponse {
         return retrofit.getArtistDataAsync(artistId).await()
     }
+
+    suspend fun getArtistTopMusic(musicBrainzId: String): MusicResponse {
+        return retrofit.getArtistTopMusic(musicBrainzId).await()
+    }
 }

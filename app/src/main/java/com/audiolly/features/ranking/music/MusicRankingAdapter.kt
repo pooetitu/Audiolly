@@ -2,6 +2,7 @@ package com.audiolly.features.ranking.music
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
@@ -26,7 +27,7 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>): Recyc
     }
 
     override fun onBindViewHolder(cell: MusicRankingItem, position: Int) {
-        cell.rank.text = musics[position].intChartPlace.toString()
+        cell.rank.text = (position+1).toString()
         cell.songTitle.text = musics[position].strTrack
         cell.songArtists.text = musics[position].strArtist
         Glide.with(cell.thumbnail.context)
@@ -38,7 +39,7 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>): Recyc
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_tab_rankings_to_artistFragment)
+                .navigate(R.id.action_tab_rankings_to_artistFragment, bundleOf("artistId" to musics[position].idArtist))
         }
     }
 
