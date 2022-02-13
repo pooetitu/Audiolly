@@ -1,6 +1,7 @@
 package com.audiolly.api
 
 import com.audiolly.api.response.*
+import com.audiolly.models.Artist
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -29,5 +30,11 @@ interface AudioDBAPI {
     fun getArtistDataAsync(@Query("i") artistId: String): Deferred<ArtistResponse>
 
     @GET("track-top10-mb.php")
-    fun getArtistTopMusic(@Query("s") musicBrainzId: String): Deferred<MusicResponse>
+    fun getArtistTopMusicAsync(@Query("s") musicBrainzId: String): Deferred<MusicResponse>
+
+    @GET("search.php")
+    fun searchArtistByNameAsync(@Query("s") artistName: String): Deferred<ArtistResponse>
+
+    @GET("searchalbum.php")
+    fun searchAlbumByArtistNameAsync(@Query("s") artistName: String): Deferred<AlbumResponse>
 }

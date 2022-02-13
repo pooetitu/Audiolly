@@ -41,7 +41,15 @@ object TheAudioDBNetworkManager {
         return retrofit.getArtistDataAsync(artistId).await()
     }
 
-    suspend fun getArtistTopMusic(musicBrainzId: String): MusicResponse {
-        return retrofit.getArtistTopMusic(musicBrainzId).await()
+    suspend fun getArtistTopMusicAsync(musicBrainzId: String): MusicResponse {
+        return retrofit.getArtistTopMusicAsync(musicBrainzId).await()
+    }
+
+    suspend fun searchArtistByNameAsync(artistName: String): ArtistResponse {
+        return retrofit.searchArtistByNameAsync(artistName).await()
+    }
+
+    suspend fun searchAlbumByArtistNameAsync(artistName: String): AlbumResponse {
+        return retrofit.searchAlbumByArtistNameAsync(artistName).await()
     }
 }

@@ -36,7 +36,7 @@ class ArtistFragment : Fragment() {
             val artistId = arguments?.getString("artistId")
             val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists[0]
             val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
-            val musics = TheAudioDBNetworkManager.getArtistTopMusic(artist.strMusicBrainzID).musics ?: mutableListOf()
+            val musics = TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzID).musics ?: mutableListOf()
             withContext(Dispatchers.Main) {
                 Glide.with(artist_thumbnail.context)
                     .load(artist.strArtistThumb)
