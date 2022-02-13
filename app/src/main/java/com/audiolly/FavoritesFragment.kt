@@ -14,6 +14,7 @@ class FavoritesFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.favorites_fragment, parent, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
     }

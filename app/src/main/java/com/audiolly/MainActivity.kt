@@ -3,9 +3,6 @@ package com.audiolly
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.audiolly.databinding.ActivityMainBinding
-import android.view.View
-
-
 
 
 class MainActivity : AppCompatActivity() {

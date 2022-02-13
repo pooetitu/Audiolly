@@ -6,4 +6,4 @@ data class AlbumTrending(
     val strArtist: String,
     val strAlbum: String,
     val strAlbumThumb: String,
-    )
+)

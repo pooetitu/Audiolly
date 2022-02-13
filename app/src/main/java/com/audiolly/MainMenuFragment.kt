@@ -19,7 +19,8 @@ class MainMenuFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val navHost = childFragmentManager.findFragmentById(R.id.main_menu_nav_host) as NavHostFragment
+        val navHost =
+            childFragmentManager.findFragmentById(R.id.main_menu_nav_host) as NavHostFragment
         NavigationUI.setupWithNavController(main_menu_bottom_nav, navHost.navController)
     }
 }

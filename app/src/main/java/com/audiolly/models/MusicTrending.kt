@@ -8,4 +8,4 @@ data class MusicTrending(
     val idAlbum: String,
     val intChartPlace: Int,
     val strTrackThumb: String
-    )
+)

@@ -14,6 +14,7 @@ class SearchFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.search_fragment, parent, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
     }

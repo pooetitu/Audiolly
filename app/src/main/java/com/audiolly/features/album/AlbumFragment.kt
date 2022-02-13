@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
 import com.audiolly.features.artist.title.TitleAdapter
-import com.audiolly.features.ranking.music.MusicRankingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -18,15 +17,14 @@ import kotlinx.android.synthetic.main.album_fragment.*
 import kotlinx.android.synthetic.main.album_fragment.artist_name
 import kotlinx.android.synthetic.main.album_fragment.description
 import kotlinx.android.synthetic.main.album_fragment.return_button
-import kotlinx.android.synthetic.main.album_fragment.titles_list
 import kotlinx.android.synthetic.main.artist_fragment.*
-import kotlinx.android.synthetic.main.music_ranking_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
-class AlbumFragment: Fragment() {
+class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         parent: ViewGroup?,
@@ -43,10 +41,13 @@ class AlbumFragment: Fragment() {
             withContext(Dispatchers.Main) {
                 album_name.text = album.strAlbum
                 artist_name.text = album.strArtist
-                description.text = album.strDescriptionEN
+                description.text = when (Locale.getDefault().language) {
+                    "fr" -> album.strDescriptionFR
+                    else -> album.strDescriptionEN
+                } ?: album.strDescriptionEN
                 rate.text = album.intScore.toString()
                 votes_count.text = getString(R.string.review_count, album.intScoreVotes)
-                song_count.text = getString(R.string.songs_count,10)
+                song_count.text = getString(R.string.songs_count, musics.size)
                 Glide.with(album_thumbnail.context)
                     .load(album.strAlbumThumb)
                     .centerCrop()

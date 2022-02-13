@@ -26,7 +26,7 @@ class AlbumRankingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         GlobalScope.launch(Dispatchers.Default) {
             val response = TheAudioDBNetworkManager.getAlbumRankingAsync().albumsRanking
-            response.sortBy{ it.intChartPlace }
+            response.sortBy { it.intChartPlace }
             withContext(Dispatchers.Main) {
                 main_list.run {
                     layoutManager = LinearLayoutManager(this@AlbumRankingFragment.context)

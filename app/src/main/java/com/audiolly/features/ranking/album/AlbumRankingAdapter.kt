@@ -17,7 +17,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) : RecyclerView.Adapter<AlbumRankingItem>() {
+class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
+    RecyclerView.Adapter<AlbumRankingItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumRankingItem {
         return AlbumRankingItem(
             LayoutInflater.from(parent.context)
@@ -27,18 +28,23 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) : Recy
 
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         GlobalScope.launch(Dispatchers.Default) {
-            val response = TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albumsRanking[0]
+            val response =
+                TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albumsRanking[0]
             withContext(Dispatchers.Main) {
                 cell.rate.text = cell.itemView.context.getString(R.string.rate, response.intScore)
-                cell.reviewCount.text = cell.itemView.context.getString(R.string.review_count, response.intScoreVotes)
+                cell.reviewCount.text =
+                    cell.itemView.context.getString(R.string.review_count, response.intScoreVotes)
             }
         }
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_tab_rankings_to_albumFragment, bundleOf("albumId" to albums[position].idAlbum))
+                .navigate(
+                    R.id.action_tab_rankings_to_albumFragment,
+                    bundleOf("albumId" to albums[position].idAlbum)
+                )
         }
-        cell.rank.text = (position+1).toString()
+        cell.rank.text = (position + 1).toString()
         cell.albumTitle.text = albums[position].strAlbum
         cell.albumArtist.text = albums[position].strArtist
         Glide.with(cell.thumbnail.context)

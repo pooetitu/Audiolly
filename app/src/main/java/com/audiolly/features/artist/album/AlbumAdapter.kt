@@ -24,7 +24,10 @@ class AlbumAdapter(private val albums: MutableList<Album>) : RecyclerView.Adapte
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_artistFragment_to_albumFragment, bundleOf("albumId" to albums[position].idAlbum))
+                .navigate(
+                    R.id.action_artistFragment_to_albumFragment,
+                    bundleOf("albumId" to albums[position].idAlbum)
+                )
         }
         cell.albumTitle.text = albums[position].strAlbum
         cell.creationYear.text = albums[position].intYearReleased.toString()

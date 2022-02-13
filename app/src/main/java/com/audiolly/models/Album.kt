@@ -1,6 +1,6 @@
 package com.audiolly.models
 
-data class Album (
+data class Album(
     val idAlbum: String,
     val idArtist: String,
     val strAlbum: String,
@@ -9,6 +9,7 @@ data class Album (
     val strGenre: String,
     val strAlbumThumb: String,
     val strDescriptionEN: String,
+    val strDescriptionFR: String,
     val intScore: Float,
     val intScoreVotes: Int,
 )

@@ -40,13 +40,14 @@
 
             <TextView
                 android:id="@+id/album_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@id/album_thumbnail"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintTop_toTopOf="@id/album_thumbnail" />
 
             <TextView

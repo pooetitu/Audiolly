@@ -6,19 +6,14 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
-import com.audiolly.api.TheAudioDBNetworkManager
-import com.audiolly.models.Music
 import com.audiolly.models.MusicTrending
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
-class MusicRankingAdapter(private val musics: MutableList<MusicTrending>): RecyclerView.Adapter<MusicRankingItem>() {
+class MusicRankingAdapter(private val musics: MutableList<MusicTrending>) :
+    RecyclerView.Adapter<MusicRankingItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicRankingItem {
         return MusicRankingItem(
             LayoutInflater.from(parent.context)
@@ -27,7 +22,7 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>): Recyc
     }
 
     override fun onBindViewHolder(cell: MusicRankingItem, position: Int) {
-        cell.rank.text = (position+1).toString()
+        cell.rank.text = (position + 1).toString()
         cell.songTitle.text = musics[position].strTrack
         cell.songArtists.text = musics[position].strArtist
         Glide.with(cell.thumbnail.context)
@@ -39,7 +34,10 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>): Recyc
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
-                .navigate(R.id.action_tab_rankings_to_artistFragment, bundleOf("artistId" to musics[position].idArtist))
+                .navigate(
+                    R.id.action_tab_rankings_to_artistFragment,
+                    bundleOf("artistId" to musics[position].idArtist)
+                )
         }
     }
 
