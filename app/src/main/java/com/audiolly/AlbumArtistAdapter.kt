@@ -1,11 +1,10 @@
-package com.audiolly.features.search
+package com.audiolly
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.audiolly.R
 import com.audiolly.features.artist.ArtistItem
 import com.audiolly.features.artist.album.AlbumItem
 import com.audiolly.models.Album
@@ -15,11 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-class AlbumArtistAdapter(val objectsList: MutableList<Any>) :
+class AlbumArtistAdapter(private val objectsList: MutableList<Any>, val artistActionId: Int, val albumActionId: Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val SECTION = 0
-    val ARTIST = 1
-    val ALBUM = 2
+    private val SECTION = 0
+    private val ARTIST = 1
+    private val ALBUM = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -51,7 +50,7 @@ class AlbumArtistAdapter(val objectsList: MutableList<Any>) :
                 holder.itemView
                     .findNavController()
                     .navigate(
-                        R.id.action_tab_search_to_artistFragment,
+                        artistActionId,
                         bundleOf("artistId" to (objectsList[position] as Artist).idArtist)
                     )
             }
@@ -68,7 +67,7 @@ class AlbumArtistAdapter(val objectsList: MutableList<Any>) :
                 holder.itemView
                     .findNavController()
                     .navigate(
-                        R.id.action_tab_search_to_albumFragment,
+                        albumActionId,
                         bundleOf("albumId" to (objectsList[position] as Album).idAlbum)
                     )
             }

@@ -28,8 +28,15 @@
     </fragment>
     <fragment
         android:id="@+id/tab_favorites"
-        android:name="com.audiolly.FavoritesFragment"
-        android:label="FavoritesFragment" />
+        android:name="com.audiolly.features.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_tab_favorites_to_artistFragment"
+            app:destination="@id/artistFragment" />
+        <action
+            android:id="@+id/action_tab_favorites_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
     <fragment
         android:id="@+id/artistFragment"
         android:name="com.audiolly.features.artist.ArtistFragment"

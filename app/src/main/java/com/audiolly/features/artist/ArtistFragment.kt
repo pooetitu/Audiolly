@@ -12,6 +12,7 @@ import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
 import com.audiolly.features.artist.album.AlbumAdapter
 import com.audiolly.features.artist.title.TitleAdapter
+import com.audiolly.storage.DatabaseManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -27,15 +28,18 @@ class ArtistFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.artist_fragment, parent, false)
     }
-
+    var isFavorite: Boolean = false
     var asyncTask: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val db = DatabaseManager(requireContext())
+
         asyncTask = GlobalScope.launch(Dispatchers.Default) {
             val artistId = arguments?.getString("artistId")
-            val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists[0]
+            val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists?.get(0)
             val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
             val musics =
-                TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzID).musics
+                TheAudioDBNetworkManager.getArtistTopMusicAsync(artist?.strMusicBrainzID!!).musics ?: mutableListOf()
+            val favoriteArtist = db.findArtistById(artistId)
             withContext(Dispatchers.Main) {
                 Glide.with(artist_thumbnail.context)
                     .load(artist.strArtistThumb)
@@ -43,10 +47,12 @@ class ArtistFragment : Fragment() {
                     .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                     .placeholder(R.drawable.ic_placeholder_artist)
                     .into(artist_thumbnail)
-                artist_name.text = artist.strArtist
+                if (artist != null) {
+                    artist_name.text = artist.strArtist
+                }
                 artist_location_genre.text =
                     getString(R.string.location_genre, artist.strCountry, artist.strGenre)
-                albums_count.text = getString(R.string.albums_count, albums.size)
+                albums_count.text = getString(R.string.albums_count, albums?.size)
                 description.text = when (Locale.getDefault().language) {
                     "fr" -> artist.strBiographyFR
                     else -> artist.strBiographyEN
@@ -62,11 +68,27 @@ class ArtistFragment : Fragment() {
                         LinearLayoutManager.HORIZONTAL,
                         false
                     )
-                    adapter = AlbumAdapter(albums)
+                    adapter = AlbumAdapter(albums!!)
                 }
                 appreciated_titles_list.run {
                     layoutManager = LinearLayoutManager(this@ArtistFragment.context)
                     adapter = TitleAdapter(musics)
+                }
+                isFavorite = favoriteArtist != null
+                if(isFavorite){
+                    like_button.setImageResource(R.drawable.ic_like_merged)
+                }
+                like_button.setOnClickListener {
+                    GlobalScope.launch(Dispatchers.Default) {
+                        isFavorite = !isFavorite
+                        if(isFavorite){
+                            like_button.setImageResource(R.drawable.ic_like_merged)
+                            db.insertArtist(artist)
+                        } else {
+                            like_button.setImageResource(R.drawable.ic_like_off)
+                            db.deleteArtist(artist)
+                        }
+                    }
                 }
             }
         }

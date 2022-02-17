@@ -1,4 +1,4 @@
-package com.audiolly.features.search
+package com.audiolly
 
 import android.view.View
 import android.widget.TextView

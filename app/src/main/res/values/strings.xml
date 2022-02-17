@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Audiolly</string>
     <string name="favorites">Favorites</string>
+    <string name="favorites_subtitle">My artists &amp; albums</string>
     <string name="search">Search</string>
     <string name="rankings">Rankings</string>
     <string name="titles">Titles</string>

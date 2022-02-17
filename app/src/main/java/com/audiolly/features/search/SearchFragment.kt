@@ -11,6 +11,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.audiolly.AlbumArtistAdapter
 import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
 import com.audiolly.models.Section
@@ -40,9 +41,9 @@ class SearchFragment : Fragment() {
             .onEach {
                 asyncTask = GlobalScope.launch(Dispatchers.Default) {
                     val albums =
-                        TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albumsRanking
+                        TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albumsRanking ?: mutableListOf()
                     val artists =
-                        TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists
+                        TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists ?: mutableListOf()
                     val objectsList = mutableListOf<Any>()
                     if (artists.size > 0) {
                         objectsList.add(Section(getString(R.string.artists)))
@@ -52,11 +53,10 @@ class SearchFragment : Fragment() {
                         objectsList.add(Section(getString(R.string.albums)))
                         objectsList.addAll(albums)
                     }
-                    println("aaaaaaaaaaaaaaaaaaaaa")
                     withContext(Dispatchers.Main) {
                         search_list.run {
                             layoutManager = LinearLayoutManager(this@SearchFragment.context)
-                            adapter = AlbumArtistAdapter(objectsList)
+                            adapter = AlbumArtistAdapter(objectsList, R.id.action_tab_search_to_artistFragment, R.id.action_tab_search_to_albumFragment)
                         }
                     }
                 }
