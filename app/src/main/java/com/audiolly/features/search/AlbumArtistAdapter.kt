@@ -15,24 +15,31 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-class AlbumArtistAdapter(val objectsList: MutableList<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AlbumArtistAdapter(val objectsList: MutableList<Any>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val SECTION = 0
     val ARTIST = 1
     val ALBUM = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType){
-            SECTION -> SectionItem(LayoutInflater.from(parent.context)
-                .inflate(R.layout.section_item, parent, false))
-            ARTIST -> ArtistItem(LayoutInflater.from(parent.context)
-                .inflate(R.layout.artist_item, parent, false))
-            else -> AlbumItem(LayoutInflater.from(parent.context)
-                .inflate(R.layout.album_item, parent, false))
+        return when (viewType) {
+            SECTION -> SectionItem(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.section_item, parent, false)
+            )
+            ARTIST -> ArtistItem(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.artist_item, parent, false)
+            )
+            else -> AlbumItem(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.album_item, parent, false)
+            )
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is ArtistItem){
+        if (holder is ArtistItem) {
             holder.artistName.text = (objectsList[position] as Artist).strArtist
             Glide.with(holder.thumbnail.context)
                 .load((objectsList[position] as Artist).strArtistThumb)
@@ -48,8 +55,7 @@ class AlbumArtistAdapter(val objectsList: MutableList<Any>) : RecyclerView.Adapt
                         bundleOf("artistId" to (objectsList[position] as Artist).idArtist)
                     )
             }
-        }
-        else if(holder is AlbumItem){
+        } else if (holder is AlbumItem) {
             holder.albumTitle.text = (objectsList[position] as Album).strAlbum
             holder.subtitle.text = (objectsList[position] as Album).strArtist
             Glide.with(holder.thumbnail.context)
@@ -66,8 +72,7 @@ class AlbumArtistAdapter(val objectsList: MutableList<Any>) : RecyclerView.Adapt
                         bundleOf("albumId" to (objectsList[position] as Album).idAlbum)
                     )
             }
-        }
-        else if (holder is SectionItem) {
+        } else if (holder is SectionItem) {
             holder.title.text = (objectsList[position] as Section).title
 
         }
@@ -78,13 +83,11 @@ class AlbumArtistAdapter(val objectsList: MutableList<Any>) : RecyclerView.Adapt
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(objectsList[position] is Section) {
+        return if (objectsList[position] is Section) {
             SECTION
-        }
-        else if(objectsList[position] is Artist) {
+        } else if (objectsList[position] is Artist) {
             ARTIST
-        }
-        else {
+        } else {
             ALBUM
         }
     }

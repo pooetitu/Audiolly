@@ -19,6 +19,7 @@ class AlbumRankingFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.album_ranking_fragment, parent, false)
     }
+
     var asyncTask: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         asyncTask = GlobalScope.launch(Dispatchers.Default) {

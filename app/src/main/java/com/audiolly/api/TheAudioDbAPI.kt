@@ -1,7 +1,6 @@
 package com.audiolly.api
 
 import com.audiolly.api.response.*
-import com.audiolly.models.Artist
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query

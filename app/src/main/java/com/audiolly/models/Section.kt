@@ -1,5 +1,5 @@
 package com.audiolly.models
 
-data class Section (
+data class Section(
     val title: String
 )

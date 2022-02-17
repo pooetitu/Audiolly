@@ -27,13 +27,15 @@ class ArtistFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.artist_fragment, parent, false)
     }
+
     var asyncTask: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         asyncTask = GlobalScope.launch(Dispatchers.Default) {
             val artistId = arguments?.getString("artistId")
             val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists[0]
             val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
-            val musics = TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzID).musics ?: mutableListOf()
+            val musics =
+                TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzID).musics
             withContext(Dispatchers.Main) {
                 Glide.with(artist_thumbnail.context)
                     .load(artist.strArtistThumb)
@@ -48,7 +50,7 @@ class ArtistFragment : Fragment() {
                 description.text = when (Locale.getDefault().language) {
                     "fr" -> artist.strBiographyFR
                     else -> artist.strBiographyEN
-                } ?: artist.strBiographyEN
+                }
                 return_button.setOnClickListener {
                     view.findNavController()
                         .navigateUp()

@@ -14,10 +14,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.album_fragment.*
-import kotlinx.android.synthetic.main.album_fragment.artist_name
-import kotlinx.android.synthetic.main.album_fragment.description
-import kotlinx.android.synthetic.main.album_fragment.return_button
-import kotlinx.android.synthetic.main.artist_fragment.*
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -29,6 +25,7 @@ class AlbumFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.album_fragment, parent, false)
     }
+
     var asyncTask: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +39,7 @@ class AlbumFragment : Fragment() {
                 description.text = when (Locale.getDefault().language) {
                     "fr" -> album.strDescriptionFR
                     else -> album.strDescriptionEN
-                } ?: album.strDescriptionEN
+                }
                 rate.text = album.intScore.toString()
                 votes_count.text = getString(R.string.review_count, album.intScoreVotes)
                 song_count.text = getString(R.string.songs_count, musics.size)
