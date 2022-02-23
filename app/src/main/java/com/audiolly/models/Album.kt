@@ -8,8 +8,8 @@ data class Album(
     val intYearReleased: Int,
     val strGenre: String,
     val strAlbumThumb: String,
-    val strDescriptionEn: String,
-    val strDescriptionFr: String,
+    val strDescriptionEN: String,
+    val strDescriptionFR: String,
     val intScore: Float,
     val intScoreVotes: Int,
 )
