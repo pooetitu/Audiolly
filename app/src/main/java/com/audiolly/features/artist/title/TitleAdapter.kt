@@ -15,8 +15,8 @@ class TitleAdapter(private val musics: MutableList<Music>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(cell: TitleItem, position: Int) {
-        val pos = position + 1
-        cell.position.text = pos.toString()
+        val displayPosition = position + 1
+        cell.position.text = displayPosition.toString()
         cell.titleName.text = musics[position].strTrack
     }
 
