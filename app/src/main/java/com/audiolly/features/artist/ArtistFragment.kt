@@ -35,7 +35,7 @@ class ArtistFragment : Fragment() {
             val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists[0]
             val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
             val musics =
-                TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzID).musics
+                TheAudioDBNetworkManager.getArtistTopMusicAsync(artist.strMusicBrainzId).musics
             withContext(Dispatchers.Main) {
                 Glide.with(artist_thumbnail.context)
                     .load(artist.strArtistThumb)
@@ -48,8 +48,8 @@ class ArtistFragment : Fragment() {
                     getString(R.string.location_genre, artist.strCountry, artist.strGenre)
                 albums_count.text = getString(R.string.albums_count, albums.size)
                 description.text = when (Locale.getDefault().language) {
-                    "fr" -> artist.strBiographyFR
-                    else -> artist.strBiographyEN
+                    "fr" -> artist.strBiographyFr
+                    else -> artist.strBiographyEn
                 }
                 return_button.setOnClickListener {
                     view.findNavController()

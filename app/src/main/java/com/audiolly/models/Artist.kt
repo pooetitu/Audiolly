@@ -4,9 +4,9 @@ data class Artist(
     val idArtist: String,
     val strArtist: String,
     val strGenre: String,
-    val strBiographyEN: String,
-    val strBiographyFR: String,
+    val strBiographyEn: String,
+    val strBiographyFr: String,
     val strCountry: String,
     val strArtistThumb: String,
-    val strMusicBrainzID: String
+    val strMusicBrainzId: String
 )

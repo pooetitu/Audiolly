@@ -37,8 +37,8 @@ class AlbumFragment : Fragment() {
                 album_name.text = album.strAlbum
                 artist_name.text = album.strArtist
                 description.text = when (Locale.getDefault().language) {
-                    "fr" -> album.strDescriptionFR
-                    else -> album.strDescriptionEN
+                    "fr" -> album.strDescriptionFr
+                    else -> album.strDescriptionEn
                 }
                 rate.text = album.intScore.toString()
                 votes_count.text = getString(R.string.review_count, album.intScoreVotes)
