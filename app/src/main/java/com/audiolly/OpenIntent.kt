@@ -32,8 +32,6 @@ class OpenIntent : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SCAN_BAR_CODE && resultCode == Activity.RESULT_OK) {
             val scanResult = data?.getStringExtra("SCAN_RESULT")
-            if (scanResult != null) {
-            }
         }
     }
 }
