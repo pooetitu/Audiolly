@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/artist_thumbnail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_placeholder_artist"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/artist_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/artist_location_genre"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start" />
+
+                        <TextView
+                            android:id="@+id/artist_location_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:layout_marginBottom="10dp"
+                            app:layout_constraintBottom_toBottomOf="@id/artist_thumbnail"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start" />
+
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="0dp"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/artist_thumbnail" />
+
+                        <TextView
+                            android:id="@+id/albums_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="20dp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/description" />
+
+                        <View
+                            android:id="@+id/albums_divider"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_15"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/albums_count" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/albums_list"
+                            android:layout_marginVertical="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/albums_divider" />
+
+                        <TextView
+                            android:id="@+id/appreciated_titles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="20dp"
+                            android:text="@string/most_appreciated_titles"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/albums_list" />
+
+                        <View
+                            android:id="@+id/appreciated_titles_divider"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_15"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/appreciated_titles" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/appreciated_titles_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                            app:layout_constraintStart_toStartOf="@id/guideline_start"
+                            app:layout_constraintTop_toBottomOf="@id/appreciated_titles_divider" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_start"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="20dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_end"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="20dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageButton
+            android:id="@+id/return_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_arrow_left"
+            android:background="@android:color/transparent"
+            android:layout_gravity="top|start"/>
+
+        <ImageButton
+            android:id="@+id/like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_like_off"
+            android:background="@android:color/transparent"
+            android:layout_gravity="top|end" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Audiolly</string>
+    <string name="favorites">Favoris</string>
+    <string name="search">Recherche</string>
+    <string name="rankings">Classements</string>
+    <string name="titles">Titres</string>
+    <string name="albums">Albums</string>
+    <string name="song_thumbnail">Miniature de la musique</string>
+    <string name="review_count">%1$d votes</string>
+    <string name="album_thumbnail">Miniature de l\'album</string>
+    <string name="most_appreciated_titles">Titres les plus appréciés</string>
+    <string name="songs_count">%1$d chansons</string>
+    <string name="artists">Artistes</string>
+    <string name="favorites_subtitle">Mes artistes &amp; albums</string>
+    <string name="no_lyrics_found">Les paroles sont introuvable</string>
+</resources>

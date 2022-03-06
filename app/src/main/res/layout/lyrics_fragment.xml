@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/thumbnail_translucent"
+                app:layout_constraintBottom_toBottomOf="@id/thumbnail_translucent"
+                app:layout_constraintStart_toStartOf="@id/thumbnail_translucent"
+                app:layout_constraintEnd_toEndOf="@id/thumbnail_translucent"
+                android:background="@color/black" />
+
+            <ImageView
+                android:id="@+id/thumbnail_translucent"
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:scaleType="centerCrop"
+                android:alpha=".5"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_placeholder_album"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/black" />
+
+            <ImageView
+                android:id="@+id/album_thumbnail"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_placeholder_album"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintBottom_toBottomOf="@id/thumbnail_translucent"/>
+
+            <TextView
+                android:id="@+id/song_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/album_thumbnail"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintTop_toTopOf="@id/album_thumbnail"
+                app:layout_constraintBottom_toBottomOf="@id/album_thumbnail"/>
+
+            <TextView
+                android:id="@+id/lyrics"
+                android:layout_width="0dp"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/thumbnail_translucent"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageButton
+        android:id="@+id/return_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/ic_arrow_left"
+        android:background="@android:color/transparent"
+        android:layout_gravity="top|start"/>
+
+    <TextView
+        android:id="@+id/artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="top|center_horizontal" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
