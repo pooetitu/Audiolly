@@ -1,6 +1,6 @@
 # Audiolly
 
-## L'application
+## Application
 
 L’application fonctionne sur Android 5.0 et plus.
 
@@ -27,10 +27,11 @@ Mais aussi l'API [api.lyrics.ovh](https://lyricsovh.docs.apiary.io/#) pour les l
 
 ### Fonctionnalités bonus
 
-- Ecran avec les paroles d’une chanson
+- Écran avec les paroles d’une chanson
 - Utilisation du debounce pour le champ de recherche
 - Fonction de mise en favoris d’un album
-- Les music dans les albums redirige vers la page paroles
+- Les musiques dans les albums redirigent vers la page 'paroles'
+- Gestion d'erreurs : dans le cas où une donnée n'arrive pas à se charger, reviens sur la page précédente
 
 ## Architecture de l'application
 
@@ -52,11 +53,11 @@ src/
 
 ### API
 
-Dans le package API on stock nos DTO (data transfer object) dans le dossier response, et on a des interactors pour communiqué avec les différentes API.
+Dans le package API on stocke nos DTO (data transfer object) dans le dossier response, et on a des **interactors** pour communiqué avec les différentes API.
 
 ### Features
 
-Pour chaque fonctionnalité de l'application on a utiliser un sous dossier dans le dossier features qui contient les fragments et autre élément de la fonctionnalité en question.
+Pour chaque fonctionnalité de l'application on a utilisé un sous dossier dans le dossier features qui contient les fragments et autre élément de la fonctionnalité en question.
 
 ### Models
 
@@ -64,11 +65,11 @@ Pour chaque objet "métier" de l'application on a un model associé qui se trouv
 
 ### Storage
 
-Dans le dosier storage on stock les informations liée a la base de donnée local SQLite.
+Dans le dossier storage on stocke les informations liées à la base de donnée locale SQLite.
 
-On utilise des DAO (data access objet) pour accèder a nos données comme le veut la librairie **room**.
+On utilise des DAO (data access objet) pour accéder a nos données comme le veut la librairie **room**.
 
-La persistance des données nous permet de récuperer les informations au chargement.
+La persistance des données nous permet de récupérer les informations au chargement.
 
 ## Quelques images
 
