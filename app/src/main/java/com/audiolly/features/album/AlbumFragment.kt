@@ -32,9 +32,9 @@ class AlbumFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val db = DatabaseManager(requireContext())
 
-        val albumId = arguments?.getString("albumId")
+        val albumId = requireArguments().getString("albumId")
         asyncTask = GlobalScope.launch(Dispatchers.Default) {
-            val album = TheAudioDBNetworkManager.getAlbumDataAsync(albumId!!).albumsRanking?.get(0)
+            val album = TheAudioDBNetworkManager.getAlbumDataAsync(albumId!!).albums?.get(0)
             val musics = TheAudioDBNetworkManager.getAlbumMusicsAsync(albumId).musics ?: mutableListOf()
             val favoriteAlbum = db.findAlbumById(albumId)
 
@@ -65,7 +65,7 @@ class AlbumFragment : Fragment() {
                 }
                 titles_list.run {
                     layoutManager = LinearLayoutManager(this@AlbumFragment.context)
-                    adapter = TitleAdapter(musics)
+                    adapter = TitleAdapter(musics, R.id.action_albumFragment_to_lyricsFragment)
                 }
                 isFavorite = favoriteAlbum != null
                 if(isFavorite){

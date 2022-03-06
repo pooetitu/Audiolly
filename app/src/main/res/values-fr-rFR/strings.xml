@@ -13,4 +13,5 @@
     <string name="songs_count">%1$d chansons</string>
     <string name="artists">Artistes</string>
     <string name="favorites_subtitle">Mes artistes &amp; albums</string>
+    <string name="no_lyrics_found">Les paroles sont introuvable</string>
 </resources>

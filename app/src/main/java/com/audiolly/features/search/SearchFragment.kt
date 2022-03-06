@@ -41,7 +41,7 @@ class SearchFragment : Fragment() {
             .onEach {
                 asyncTask = GlobalScope.launch(Dispatchers.Default) {
                     val albums =
-                        TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albumsRanking ?: mutableListOf()
+                        TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albums ?: mutableListOf()
                     val artists =
                         TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists ?: mutableListOf()
                     val objectsList = mutableListOf<Any>()

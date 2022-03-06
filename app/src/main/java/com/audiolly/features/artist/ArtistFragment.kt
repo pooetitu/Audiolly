@@ -33,10 +33,14 @@ class ArtistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val db = DatabaseManager(requireContext())
 
+        return_button.setOnClickListener {
+            view.findNavController()
+                .navigateUp()
+        }
         asyncTask = GlobalScope.launch(Dispatchers.Default) {
-            val artistId = arguments?.getString("artistId")
+            val artistId = requireArguments().getString("artistId")
             val artist = TheAudioDBNetworkManager.getArtistDataAsync(artistId!!).artists?.get(0)
-            val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albumsRanking
+            val albums = TheAudioDBNetworkManager.getArtistAlbumsAsync(artistId).albums
             val musics =
                 TheAudioDBNetworkManager.getArtistTopMusicAsync(artist?.strMusicBrainzID!!).musics ?: mutableListOf()
             val favoriteArtist = db.findArtistById(artistId)
@@ -57,10 +61,6 @@ class ArtistFragment : Fragment() {
                     "fr" -> artist.strBiographyFR
                     else -> artist.strBiographyEN
                 }
-                return_button.setOnClickListener {
-                    view.findNavController()
-                        .navigateUp()
-                }
                 albums_list.run {
                     layoutManager = GridLayoutManager(
                         this@ArtistFragment.context,
@@ -72,7 +72,7 @@ class ArtistFragment : Fragment() {
                 }
                 appreciated_titles_list.run {
                     layoutManager = LinearLayoutManager(this@ArtistFragment.context)
-                    adapter = TitleAdapter(musics)
+                    adapter = TitleAdapter(musics, R.id.action_artistFragment_to_lyricsFragment)
                 }
                 isFavorite = favoriteArtist != null
                 if(isFavorite){

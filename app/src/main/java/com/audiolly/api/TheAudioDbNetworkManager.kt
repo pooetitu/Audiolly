@@ -1,5 +1,6 @@
 package com.audiolly.api
 
+import com.audiolly.BuildConfig
 import com.audiolly.api.response.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object TheAudioDBNetworkManager {
     private val retrofit: AudioDBAPI = Retrofit.Builder()
-        .baseUrl("https://theaudiodb.com/api/v1/json/523532/")
+        .baseUrl("https://theaudiodb.com/api/v1/json/${BuildConfig.THEAUDIODB_TOKEN}/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()

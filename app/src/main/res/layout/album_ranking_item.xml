@@ -84,6 +84,5 @@
         android:textColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/album_artist"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rating"
-        android:text="@string/review_count"/>
+        app:layout_constraintStart_toEndOf="@+id/rating"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

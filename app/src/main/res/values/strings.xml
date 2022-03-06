@@ -15,4 +15,5 @@
     <string name="albums_count" translatable="false">Albums (%1$d)</string>
     <string name="songs_count">%1$d songs</string>
     <string name="artists">Artists</string>
+    <string name="no_lyrics_found">No lyrics are available at the moment</string>
 </resources>

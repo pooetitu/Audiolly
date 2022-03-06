@@ -47,6 +47,9 @@
         <argument
             android:name="artistId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_artistFragment_to_lyricsFragment"
+            app:destination="@id/lyricsFragment" />
     </fragment>
     <fragment
         android:id="@+id/albumFragment"
@@ -54,6 +57,17 @@
         android:label="AlbumFragment" >
         <argument
             android:name="albumId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_albumFragment_to_lyricsFragment"
+            app:destination="@id/lyricsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lyricsFragment"
+        android:name="com.audiolly.features.lyrics.LyricsFragment"
+        android:label="LyricsFragment" >
+        <argument
+            android:name="musicId"
             app:argType="string" />
     </fragment>
 </navigation>

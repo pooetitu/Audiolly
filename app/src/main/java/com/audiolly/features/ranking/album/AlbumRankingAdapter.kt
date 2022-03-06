@@ -29,7 +29,7 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         GlobalScope.launch(Dispatchers.Default) {
             val response =
-                TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albumsRanking?.get(0)
+                TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(0)
             withContext(Dispatchers.Main) {
                 cell.rate.text = cell.itemView.context.getString(R.string.rate, response?.intScore)
                 cell.reviewCount.text =
