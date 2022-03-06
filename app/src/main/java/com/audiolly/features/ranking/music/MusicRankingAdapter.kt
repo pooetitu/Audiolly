@@ -22,15 +22,15 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>) :
     }
 
     override fun onBindViewHolder(cell: MusicRankingItem, position: Int) {
-        cell.rank.text = (position + 1).toString()
-        cell.songTitle.text = musics[position].strTrack
-        cell.songArtists.text = musics[position].strArtist
-        Glide.with(cell.thumbnail.context)
-            .load(musics[position].strTrackThumb)
-            .centerCrop()
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-            .placeholder(R.drawable.ic_placeholder_album)
-            .into(cell.thumbnail)
+        val displayPosition = (position + 1).toString()
+        fillViewData(cell, displayPosition, position)
+        setListeners(cell, position)
+    }
+
+    private fun setListeners(
+        cell: MusicRankingItem,
+        position: Int
+    ) {
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
@@ -39,6 +39,22 @@ class MusicRankingAdapter(private val musics: MutableList<MusicTrending>) :
                     bundleOf("artistId" to musics[position].idArtist)
                 )
         }
+    }
+
+    private fun fillViewData(
+        cell: MusicRankingItem,
+        displayPosition: String,
+        position: Int
+    ) {
+        cell.rank.text = displayPosition
+        cell.songTitle.text = musics[position].strTrack
+        cell.songArtists.text = musics[position].strArtist
+        Glide.with(cell.thumbnail.context)
+            .load(musics[position].strTrackThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(cell.thumbnail)
     }
 
     override fun getItemCount(): Int {

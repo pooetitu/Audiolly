@@ -45,23 +45,15 @@ class SearchFragment : Fragment() {
                     var albums: MutableList<Album> = mutableListOf()
                     var artists: MutableList<Artist> = mutableListOf()
                     try {
-                        albums =
-                            TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albums
-                                ?: albums
-                        artists =
-                            TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists
-                                ?: artists
+                        albums = TheAudioDBNetworkManager
+                            .searchAlbumByArtistNameAsync(it.toString()).albums ?: albums
+                        artists = TheAudioDBNetworkManager
+                            .searchArtistByNameAsync(it.toString()).artists ?: artists
                     } catch (e: Exception) {
                     }
                     val objectsList = mutableListOf<Any>()
-                    if (artists.size > 0) {
-                        objectsList.add(Section(getString(R.string.artists)))
-                        objectsList.addAll(artists)
-                    }
-                    if (albums.size > 0) {
-                        objectsList.add(Section(getString(R.string.albums)))
-                        objectsList.addAll(albums)
-                    }
+                    fillArtistSection(artists, objectsList)
+                    fillAlbumSection(albums, objectsList)
                     withContext(Dispatchers.Main) {
                         search_list.run {
                             layoutManager = LinearLayoutManager(this@SearchFragment.context)
@@ -76,6 +68,26 @@ class SearchFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
+    }
+
+    private fun fillAlbumSection(
+        albums: MutableList<Album>,
+        objectsList: MutableList<Any>
+    ) {
+        if (albums.size > 0) {
+            objectsList.add(Section(getString(R.string.albums)))
+            objectsList.addAll(albums)
+        }
+    }
+
+    private fun fillArtistSection(
+        artists: MutableList<Artist>,
+        objectsList: MutableList<Any>
+    ) {
+        if (artists.size > 0) {
+            objectsList.add(Section(getString(R.string.artists)))
+            objectsList.addAll(artists)
+        }
     }
 
     override fun onDestroy() {

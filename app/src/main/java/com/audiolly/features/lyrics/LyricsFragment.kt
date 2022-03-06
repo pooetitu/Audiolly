@@ -59,23 +59,31 @@ class LyricsFragment : Fragment() {
                         .navigateUp()
                     return@withContext
                 }
-                lyrics.text = musicLyrics
-                song_title.text = music.strTrack
-                artist_name.text = music.strArtist
-
-                Glide.with(thumbnail_translucent)
-                    .load(album.strAlbumThumb)
-                    .centerCrop()
-                    .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                    .placeholder(R.drawable.ic_placeholder_album)
-                    .into(thumbnail_translucent)
-                Glide.with(album_thumbnail)
-                    .load(album.strAlbumThumb)
-                    .centerCrop()
-                    .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                    .placeholder(R.drawable.ic_placeholder_album)
-                    .into(album_thumbnail)
+                fillViewData(musicLyrics, music, album)
             }
         }
+    }
+
+    private fun fillViewData(
+        musicLyrics: String?,
+        music: Music,
+        album: Album
+    ) {
+        lyrics.text = musicLyrics
+        song_title.text = music.strTrack
+        artist_name.text = music.strArtist
+
+        Glide.with(thumbnail_translucent)
+            .load(album.strAlbumThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(thumbnail_translucent)
+        Glide.with(album_thumbnail)
+            .load(album.strAlbumThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(album_thumbnail)
     }
 }
