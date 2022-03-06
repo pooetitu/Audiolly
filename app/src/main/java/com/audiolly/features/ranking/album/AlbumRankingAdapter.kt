@@ -2,12 +2,12 @@ package com.audiolly.features.ranking.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
+import com.audiolly.models.Album
 import com.audiolly.models.AlbumTrending
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 
 class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
@@ -30,17 +29,28 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
 
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         GlobalScope.launch(Dispatchers.Default) {
+            var album: Album? = null
             try {
-                val response =
-                    TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(0)
-                withContext(Dispatchers.Main) {
-                    cell.rate.text = cell.itemView.context.getString(R.string.rate, response?.intScore)
-                    cell.reviewCount.text =
-                        cell.itemView.context.getString(R.string.review_count, response?.intScoreVotes)
+                album =
+                    TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(
+                        0
+                    )
+            } catch (e: Exception) {
+            }
+            withContext(Dispatchers.Main) {
+                if (album == null) {
+                    cell.itemView.findNavController()
+                        .navigateUp()
+                    return@withContext
                 }
-            } catch (e: HttpException) {
-                Toast.makeText(cell.itemView.context, e.message(), Toast.LENGTH_LONG).show()
-            } catch (e: Exception) { }
+                cell.rate.text =
+                    cell.itemView.context.getString(R.string.rate, album.intScore)
+                cell.reviewCount.text =
+                    cell.itemView.context.getString(
+                        R.string.review_count,
+                        album.intScoreVotes
+                    )
+            }
         }
         cell.itemView.setOnClickListener {
             cell.itemView
@@ -50,7 +60,8 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
                     bundleOf("albumId" to albums[position].idAlbum)
                 )
         }
-        cell.rank.text = (position + 1).toString()
+        val displayedPosition = position + 1
+        cell.rank.text = displayedPosition.toString()
         cell.albumTitle.text = albums[position].strAlbum
         cell.albumArtist.text = albums[position].strArtist
         Glide.with(cell.thumbnail.context)

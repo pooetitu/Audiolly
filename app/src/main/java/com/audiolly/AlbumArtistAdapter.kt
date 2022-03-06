@@ -14,7 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-class AlbumArtistAdapter(private val objectsList: MutableList<Any>, val artistActionId: Int, val albumActionId: Int) :
+class AlbumArtistAdapter(
+    private val objectsList: MutableList<Any>,
+    val artistActionId: Int,
+    val albumActionId: Int
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val SECTION = 0
     private val ARTIST = 1

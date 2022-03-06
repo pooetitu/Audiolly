@@ -1,7 +1,6 @@
 package com.audiolly.storage.dao
 
 import androidx.room.*
-import com.audiolly.models.Album
 import com.audiolly.models.Artist
 
 @Dao
@@ -10,7 +9,7 @@ interface ArtistDao {
     fun insert(artist: Artist)
 
     @Query("SELECT * FROM artist")
-    fun findAll() : List<Artist>
+    fun findAll(): List<Artist>
 
     @Query("SELECT * FROM artist WHERE idArtist=:id ")
     fun findById(id: String): Artist?

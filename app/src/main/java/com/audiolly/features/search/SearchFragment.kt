@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.audiolly.AlbumArtistAdapter
 import com.audiolly.R
 import com.audiolly.api.TheAudioDBNetworkManager
+import com.audiolly.models.Album
+import com.audiolly.models.Artist
 import com.audiolly.models.Section
 import kotlinx.android.synthetic.main.search_fragment.*
 import kotlinx.coroutines.*
@@ -23,7 +24,6 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import retrofit2.HttpException
 
 class SearchFragment : Fragment() {
     override fun onCreateView(
@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
         return inflater.inflate(R.layout.search_fragment, parent, false)
     }
 
-    var asyncTask: Job? = null
+    private var asyncTask: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         search_field.onRightDrawableClicked { search_field.text.clear() }
@@ -42,30 +42,36 @@ class SearchFragment : Fragment() {
             .debounce(500)
             .onEach {
                 asyncTask = GlobalScope.launch(Dispatchers.Default) {
+                    var albums: MutableList<Album> = mutableListOf()
+                    var artists: MutableList<Artist> = mutableListOf()
                     try {
-                        val albums =
-                            TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albums ?: mutableListOf()
-                        val artists =
-                            TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists ?: mutableListOf()
-                        val objectsList = mutableListOf<Any>()
-                        if (artists.size > 0) {
-                            objectsList.add(Section(getString(R.string.artists)))
-                            objectsList.addAll(artists)
+                        albums =
+                            TheAudioDBNetworkManager.searchAlbumByArtistNameAsync(it.toString()).albums
+                                ?: albums
+                        artists =
+                            TheAudioDBNetworkManager.searchArtistByNameAsync(it.toString()).artists
+                                ?: artists
+                    } catch (e: Exception) {
+                    }
+                    val objectsList = mutableListOf<Any>()
+                    if (artists.size > 0) {
+                        objectsList.add(Section(getString(R.string.artists)))
+                        objectsList.addAll(artists)
+                    }
+                    if (albums.size > 0) {
+                        objectsList.add(Section(getString(R.string.albums)))
+                        objectsList.addAll(albums)
+                    }
+                    withContext(Dispatchers.Main) {
+                        search_list.run {
+                            layoutManager = LinearLayoutManager(this@SearchFragment.context)
+                            adapter = AlbumArtistAdapter(
+                                objectsList,
+                                R.id.action_tab_search_to_artistFragment,
+                                R.id.action_tab_search_to_albumFragment
+                            )
                         }
-                        if (albums.size > 0) {
-                            objectsList.add(Section(getString(R.string.albums)))
-                            objectsList.addAll(albums)
-                        }
-                        withContext(Dispatchers.Main) {
-                            search_list.run {
-                                layoutManager = LinearLayoutManager(this@SearchFragment.context)
-                                adapter = AlbumArtistAdapter(objectsList, R.id.action_tab_search_to_artistFragment, R.id.action_tab_search_to_albumFragment)
-                            }
-                        }
-
-                    } catch (e: HttpException) {
-                        Toast.makeText(context, e.message(), Toast.LENGTH_LONG).show()
-                    } catch (e: Exception) { }
+                    }
                 }
             }
             .launchIn(lifecycleScope)
