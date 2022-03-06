@@ -62,51 +62,72 @@ class ArtistFragment : Fragment() {
                         .navigateUp()
                     return@withContext
                 }
-                Glide.with(artist_thumbnail.context)
-                    .load(artist.strArtistThumb)
-                    .centerCrop()
-                    .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                    .placeholder(R.drawable.ic_placeholder_artist)
-                    .into(artist_thumbnail)
-                artist_name.text = artist.strArtist
-                artist_location_genre.text =
-                    getString(R.string.location_genre, artist.strCountry, artist.strGenre)
-                albums_count.text = getString(R.string.albums_count, albums.size)
-                description.text = when (Locale.getDefault().language) {
-                    "fr" -> artist.strBiographyFR
-                    else -> artist.strBiographyEN
-                }
-                albums_list.run {
-                    layoutManager = GridLayoutManager(
-                        this@ArtistFragment.context,
-                        3,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                    )
-                    adapter = AlbumAdapter(albums)
-                }
-                appreciated_titles_list.run {
-                    layoutManager = LinearLayoutManager(this@ArtistFragment.context)
-                    adapter = TitleAdapter(musics, R.id.action_artistFragment_to_lyricsFragment)
-                }
+                fillViewData(artist, albums)
+                runRecyclerViews(albums, musics)
                 isFavorite = favoriteArtist != null
                 if (isFavorite) {
                     like_button.setImageResource(R.drawable.ic_like_merged)
                 }
-                like_button.setOnClickListener {
-                    GlobalScope.launch(Dispatchers.Default) {
-                        isFavorite = !isFavorite
-                        if (isFavorite) {
-                            like_button.setImageResource(R.drawable.ic_like_merged)
-                            db.insertArtist(artist)
-                        } else {
-                            like_button.setImageResource(R.drawable.ic_like_off)
-                            db.deleteArtist(artist)
-                        }
-                    }
+                setListeners(db, artist)
+            }
+        }
+    }
+
+    private fun setListeners(
+        db: DatabaseManager,
+        artist: Artist
+    ) {
+        like_button.setOnClickListener {
+            GlobalScope.launch(Dispatchers.Default) {
+                isFavorite = !isFavorite
+                if (isFavorite) {
+                    like_button.setImageResource(R.drawable.ic_like_merged)
+                    db.insertArtist(artist)
+                } else {
+                    like_button.setImageResource(R.drawable.ic_like_off)
+                    db.deleteArtist(artist)
                 }
             }
         }
+    }
+
+    private fun runRecyclerViews(
+        albums: MutableList<Album>,
+        musics: MutableList<Music>
+    ) {
+        albums_list.run {
+            layoutManager = GridLayoutManager(
+                this@ArtistFragment.context,
+                3,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = AlbumAdapter(albums)
+        }
+        appreciated_titles_list.run {
+            layoutManager = LinearLayoutManager(this@ArtistFragment.context)
+            adapter = TitleAdapter(musics, R.id.action_artistFragment_to_lyricsFragment)
+        }
+    }
+
+    private fun fillViewData(
+        artist: Artist,
+        albums: MutableList<Album>
+    ) {
+        Glide.with(artist_thumbnail.context)
+            .load(artist.strArtistThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_artist)
+            .into(artist_thumbnail)
+        artist_name.text = artist.strArtist
+        artist_location_genre.text =
+            getString(R.string.location_genre, artist.strCountry, artist.strGenre)
+        albums_count.text = getString(R.string.albums_count, albums.size)
+        description.text = when (Locale.getDefault().language) {
+            "fr" -> artist.strBiographyFR
+            else -> artist.strBiographyEN
+        } ?: artist.strBiographyEN
     }
 
     override fun onDestroy() {

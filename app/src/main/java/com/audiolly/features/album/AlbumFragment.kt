@@ -52,52 +52,68 @@ class AlbumFragment : Fragment() {
                         .navigateUp()
                     return@withContext
                 }
-                album_name.text = album.strAlbum
-                artist_name.text = album.strArtist
-                description.text = when (Locale.getDefault().language) {
-                    "fr" -> album.strDescriptionFR
-                    else -> album.strDescriptionEN
-                }
-                rate.text = album.intScore.toString()
-                votes_count.text = getString(R.string.review_count, album.intScoreVotes)
-                song_count.text = getString(R.string.songs_count, musics.size)
-                Glide.with(album_thumbnail.context)
-                    .load(album.strAlbumThumb)
-                    .centerCrop()
-                    .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                    .placeholder(R.drawable.ic_placeholder_album)
-                    .into(album_thumbnail)
-                Glide.with(thumbnail_translucent.context)
-                    .load(album.strAlbumThumb)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_placeholder_album)
-                    .into(thumbnail_translucent)
-                return_button.setOnClickListener {
-                    view.findNavController()
-                        .navigateUp()
-                }
-                titles_list.run {
-                    layoutManager = LinearLayoutManager(this@AlbumFragment.context)
-                    adapter = TitleAdapter(musics, R.id.action_albumFragment_to_lyricsFragment)
-                }
+                fillViewInfos(album, musics)
                 isFavorite = favoriteAlbum != null
                 if (isFavorite) {
                     like_button.setImageResource(R.drawable.ic_like_merged)
                 }
-                like_button.setOnClickListener {
-                    GlobalScope.launch(Dispatchers.Default) {
-                        isFavorite = !isFavorite
-                        if (isFavorite) {
-                            like_button.setImageResource(R.drawable.ic_like_merged)
-                            db.insertAlbum(album)
-                        } else {
-                            like_button.setImageResource(R.drawable.ic_like_off)
-                            db.deleteAlbum(album)
-                        }
-                    }
+                setListeners(view, musics, db, album)
+            }
+        }
+    }
+
+    private fun setListeners(
+        view: View,
+        musics: MutableList<Music>,
+        db: DatabaseManager,
+        album: Album
+    ) {
+        return_button.setOnClickListener {
+            view.findNavController()
+                .navigateUp()
+        }
+        titles_list.run {
+            layoutManager = LinearLayoutManager(this@AlbumFragment.context)
+            adapter = TitleAdapter(musics, R.id.action_albumFragment_to_lyricsFragment)
+        }
+        like_button.setOnClickListener {
+            GlobalScope.launch(Dispatchers.Default) {
+                isFavorite = !isFavorite
+                if (isFavorite) {
+                    like_button.setImageResource(R.drawable.ic_like_merged)
+                    db.insertAlbum(album)
+                } else {
+                    like_button.setImageResource(R.drawable.ic_like_off)
+                    db.deleteAlbum(album)
                 }
             }
         }
+    }
+
+    private fun fillViewInfos(
+        album: Album,
+        musics: MutableList<Music>
+    ) {
+        album_name.text = album.strAlbum
+        artist_name.text = album.strArtist
+        description.text = when (Locale.getDefault().language) {
+            "fr" -> album.strDescriptionFR
+            else -> album.strDescriptionEN
+        }
+        rate.text = album.intScore.toString()
+        votes_count.text = getString(R.string.review_count, album.intScoreVotes)
+        song_count.text = getString(R.string.songs_count, musics.size)
+        Glide.with(album_thumbnail.context)
+            .load(album.strAlbumThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(album_thumbnail)
+        Glide.with(thumbnail_translucent.context)
+            .load(album.strAlbumThumb)
+            .centerCrop()
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(thumbnail_translucent)
     }
 
     override fun onDestroy() {

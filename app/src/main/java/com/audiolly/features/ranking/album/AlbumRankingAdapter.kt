@@ -38,20 +38,17 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
             } catch (e: Exception) {
             }
             withContext(Dispatchers.Main) {
-                if (album == null) {
-                    cell.itemView.findNavController()
-                        .navigateUp()
-                    return@withContext
-                }
-                cell.rate.text =
-                    cell.itemView.context.getString(R.string.rate, album.intScore)
-                cell.reviewCount.text =
-                    cell.itemView.context.getString(
-                        R.string.review_count,
-                        album.intScoreVotes
-                    )
+                fillDataFromAPI(album, cell)
             }
         }
+        fillViewData(position, cell)
+        setListeners(cell, position)
+    }
+
+    private fun setListeners(
+        cell: AlbumRankingItem,
+        position: Int
+    ) {
         cell.itemView.setOnClickListener {
             cell.itemView
                 .findNavController()
@@ -60,6 +57,12 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
                     bundleOf("albumId" to albums[position].idAlbum)
                 )
         }
+    }
+
+    private fun fillViewData(
+        position: Int,
+        cell: AlbumRankingItem
+    ) {
         val displayedPosition = position + 1
         cell.rank.text = displayedPosition.toString()
         cell.albumTitle.text = albums[position].strAlbum
@@ -70,6 +73,22 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
             .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
             .placeholder(R.drawable.ic_placeholder_album)
             .into(cell.thumbnail)
+    }
+
+    private fun fillDataFromAPI(
+        album: Album?,
+        cell: AlbumRankingItem
+    ) {
+        if (album == null) {
+            cell.itemView.findNavController()
+                .navigateUp()
+            return
+        }
+        cell.rate.text = cell.itemView.context.getString(R.string.rate, album.intScore)
+        cell.reviewCount.text = cell.itemView.context.getString(
+            R.string.review_count,
+            album.intScoreVotes
+        )
     }
 
     override fun getItemCount(): Int {
