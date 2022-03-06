@@ -44,7 +44,6 @@
             <TextView
                 android:id="@+id/song_title"
                 android:layout_width="0dp"
-                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:textSize="24sp"
@@ -58,11 +57,12 @@
             <TextView
                 android:id="@+id/lyrics"
                 android:layout_width="0dp"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="20dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
                 android:textSize="16sp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@id/album_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/thumbnail_translucent"
                 app:layout_constraintStart_toStartOf="@id/guideline_start"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
@@ -71,14 +71,14 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="15dp" />
+                app:layout_constraintGuide_begin="20dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_end"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="15dp" />
+                app:layout_constraintGuide_end="20dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
