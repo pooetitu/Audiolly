@@ -43,41 +43,49 @@ class AlbumArtistAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ArtistItem) {
-            holder.artistName.text = (objectsList[position] as Artist).strArtist
-            Glide.with(holder.thumbnail.context)
-                .load((objectsList[position] as Artist).strArtistThumb)
-                .centerCrop()
-                .circleCrop()
-                .placeholder(R.drawable.ic_placeholder_artist)
-                .into(holder.thumbnail)
-            holder.itemView.setOnClickListener {
-                holder.itemView
-                    .findNavController()
-                    .navigate(
-                        artistActionId,
-                        bundleOf("artistId" to (objectsList[position] as Artist).idArtist)
-                    )
-            }
+            bindArtist(holder, position)
         } else if (holder is AlbumItem) {
-            holder.albumTitle.text = (objectsList[position] as Album).strAlbum
-            holder.subtitle.text = (objectsList[position] as Album).strArtist
-            Glide.with(holder.thumbnail.context)
-                .load((objectsList[position] as Album).strAlbumThumb)
-                .centerCrop()
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                .placeholder(R.drawable.ic_placeholder_album)
-                .into(holder.thumbnail)
-            holder.itemView.setOnClickListener {
-                holder.itemView
-                    .findNavController()
-                    .navigate(
-                        albumActionId,
-                        bundleOf("albumId" to (objectsList[position] as Album).idAlbum)
-                    )
-            }
+            bindAlbum(holder, position)
         } else if (holder is SectionItem) {
             holder.title.text = (objectsList[position] as Section).title
 
+        }
+    }
+
+    private fun bindAlbum(holder: AlbumItem, position: Int) {
+        holder.albumTitle.text = (objectsList[position] as Album).strAlbum
+        holder.subtitle.text = (objectsList[position] as Album).strArtist
+        Glide.with(holder.thumbnail.context)
+            .load((objectsList[position] as Album).strAlbumThumb)
+            .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .placeholder(R.drawable.ic_placeholder_album)
+            .into(holder.thumbnail)
+        holder.itemView.setOnClickListener {
+            holder.itemView
+                .findNavController()
+                .navigate(
+                    albumActionId,
+                    bundleOf("albumId" to (objectsList[position] as Album).idAlbum)
+                )
+        }
+    }
+
+    private fun bindArtist(holder: ArtistItem, position: Int) {
+        holder.artistName.text = (objectsList[position] as Artist).strArtist
+        Glide.with(holder.thumbnail.context)
+            .load((objectsList[position] as Artist).strArtistThumb)
+            .centerCrop()
+            .circleCrop()
+            .placeholder(R.drawable.ic_placeholder_artist)
+            .into(holder.thumbnail)
+        holder.itemView.setOnClickListener {
+            holder.itemView
+                .findNavController()
+                .navigate(
+                    artistActionId,
+                    bundleOf("artistId" to (objectsList[position] as Artist).idArtist)
+                )
         }
     }
 

@@ -31,10 +31,8 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
         GlobalScope.launch(Dispatchers.Default) {
             var album: Album? = null
             try {
-                album =
-                    TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(
-                        0
-                    )
+                album = TheAudioDBNetworkManager
+                    .getAlbumDataAsync(albums[position].idAlbum).albums?.get(0)
             } catch (e: Exception) {
             }
             withContext(Dispatchers.Main) {
