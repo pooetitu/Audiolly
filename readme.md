@@ -75,7 +75,7 @@ La persistance des données nous permet de récuperer les informations au charge
 ![ranking titre](docs/ranking-title.png)
 ![ranking album](docs/ranking-album.png)
 ![search](docs/search.png)
-![favorties](docs/favorites.png)
+![favorites](docs/favorites.png)
 ![artiste](docs/artiste.png)
 ![album](docs/album.png)
 
