@@ -6,9 +6,9 @@ L’application fonctionne sur Android 5.0 et plus.
 
 Elle a été développée uniquement en Kotlin.
 
-On a utiliser les API de TheAudioDB pour les rankings, les titres, les albums, les artistes ...
+On a utilisé les API de [TheAudioDB](https://theaudiodb.com/api_guide.php) pour les rankings, les titres, les albums, les artistes ...
 
-Mais aussi l'API [api.lyrics.ovh](api.lyrics.ovh) pour les lyrics. (BONUS)
+Mais aussi l'API [api.lyrics.ovh](https://lyricsovh.docs.apiary.io/#) pour les lyrics. (BONUS)
 
 ## Fonctionnalité
 
@@ -28,6 +28,9 @@ Mais aussi l'API [api.lyrics.ovh](api.lyrics.ovh) pour les lyrics. (BONUS)
 ### Fonctionnalités bonus
 
 - Ecran avec les paroles d’une chanson
+- Utilisation du debounce pour le champ de recherche
+- Fonction de mise en favoris d’un album
+- Les music dans les albums redirige vers la page paroles
 
 ## Architecture de l'application
 
