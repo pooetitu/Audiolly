@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.audiolly.R
 import com.audiolly.models.Music
 
-class TitleAdapter(private val musics: MutableList<Music>, private val lyricsAction: Int) : RecyclerView.Adapter<TitleItem>() {
+class TitleAdapter(private val musics: MutableList<Music>, private val lyricsAction: Int) :
+    RecyclerView.Adapter<TitleItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleItem {
         return TitleItem(
             LayoutInflater.from(parent.context)

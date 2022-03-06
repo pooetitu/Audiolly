@@ -22,7 +22,7 @@ class DatabaseManager(context: Context) {
         "audiolly_DB"
     ).build()
 
-    fun findAllAlbums() : List<Album> {
+    fun findAllAlbums(): List<Album> {
         return db.albumDao().findAll()
     }
 
@@ -38,7 +38,7 @@ class DatabaseManager(context: Context) {
         return db.albumDao().delete(album)
     }
 
-    fun findAllArtists() : List<Artist> {
+    fun findAllArtists(): List<Artist> {
         return db.artistDao().findAll()
     }
 
