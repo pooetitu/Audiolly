@@ -2,6 +2,7 @@ package com.audiolly.features.ranking.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 
 class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
@@ -28,13 +30,17 @@ class AlbumRankingAdapter(private val albums: MutableList<AlbumTrending>) :
 
     override fun onBindViewHolder(cell: AlbumRankingItem, position: Int) {
         GlobalScope.launch(Dispatchers.Default) {
-            val response =
-                TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(0)
-            withContext(Dispatchers.Main) {
-                cell.rate.text = cell.itemView.context.getString(R.string.rate, response?.intScore)
-                cell.reviewCount.text =
-                    cell.itemView.context.getString(R.string.review_count, response?.intScoreVotes)
-            }
+            try {
+                val response =
+                    TheAudioDBNetworkManager.getAlbumDataAsync(albums[position].idAlbum).albums?.get(0)
+                withContext(Dispatchers.Main) {
+                    cell.rate.text = cell.itemView.context.getString(R.string.rate, response?.intScore)
+                    cell.reviewCount.text =
+                        cell.itemView.context.getString(R.string.review_count, response?.intScoreVotes)
+                }
+            } catch (e: HttpException) {
+                Toast.makeText(cell.itemView.context, e.message(), Toast.LENGTH_LONG).show()
+            } catch (e: Exception) { }
         }
         cell.itemView.setOnClickListener {
             cell.itemView
